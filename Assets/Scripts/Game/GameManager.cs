@@ -2,15 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour 
+{
+	public static GameManager Instance { get; private set; }
 
-	// Use this for initialization
-	void Start () {
-		
+	private int _currentLevel = 1;
+
+	public int CurrentLevel 
+	{ 
+		get
+		{
+			return _currentLevel;
+		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+	void Awake()
+	{
+		if (Instance != null && Instance != this)
+		{
+			Destroy (gameObject);
+		}
 		
+		Instance = this;
+		DontDestroyOnLoad (gameObject);
+	}
+
+	public void CompleteLevel()
+	{
+		_currentLevel++;
 	}
 }

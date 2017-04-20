@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour 
 {
@@ -19,6 +20,7 @@ public class LevelManager : MonoBehaviour
 	public float IntroDuration = 5.0f;
 	public float LevelLength = 30.0f;
 	public CanvasGroup GameOverCanvasGroup;
+	public CanvasGroup LevelCompleteCanvasGroup;
 	public Canvas IntroCanvas;
 	public Text LevelText;
 
@@ -54,7 +56,7 @@ public class LevelManager : MonoBehaviour
 				onStateChange (LevelManager.LevelStates.Intro);
 				currentState = LevelStates.Intro;
 				_introDelayTimer = Time.time + IntroDuration;
-				LevelText.text = "0";
+				LevelText.text = GameManager.Instance.CurrentLevel.ToString ();
 				break;
 			case LevelManager.LevelStates.Intro:
 				if (!_introAnimationRunning)
@@ -81,6 +83,8 @@ public class LevelManager : MonoBehaviour
 				DisplayGameOver ();
 				break;
 			case LevelStates.Complete:
+				GameManager.Instance.CompleteLevel ();
+				DisplayLevelComplete ();
 				break;
 		}
 	}
@@ -107,10 +111,22 @@ public class LevelManager : MonoBehaviour
 		GameOverCanvasGroup.interactable = true;
 		GameOverCanvasGroup.blocksRaycasts = true;
 	}
+	void DisplayLevelComplete()
+	{
+		LevelCompleteCanvasGroup.alpha = 1;
+		LevelCompleteCanvasGroup.interactable = true;
+		LevelCompleteCanvasGroup.blocksRaycasts = true;
+	}
 
 	public void PlayerDied()
 	{
 		currentState = LevelStates.GameOver;
 		onStateChange (LevelStates.GameOver);
+	}
+
+	public void SwitchToScene(string sceneName)
+	{
+		Debug.Log ("Switch To Scene called: " + sceneName);
+		SceneManager.LoadScene (sceneName);
 	}
 }

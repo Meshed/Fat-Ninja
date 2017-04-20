@@ -60,6 +60,7 @@
      <Compile Include="Assets\Scripts\Player\PlayerStateController.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerStateListener.cs" />
      <Compile Include="Assets\Scripts\Player\ThrowWeapon.cs" />
+     <Compile Include="Assets\Scripts\SceneHandler.cs" />
      <Compile Include="Assets\Scripts\UI\AttackButtonDisable.cs" />
      <Compile Include="Assets\Scripts\UI\ButtStompButtonDisable.cs" />
      <Compile Include="Assets\Scripts\UI\ButtonDisableToggle.cs" />
