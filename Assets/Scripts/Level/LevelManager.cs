@@ -73,6 +73,7 @@ public class LevelManager : MonoBehaviour
 				{
 					if (Time.time >= _levelLengthTimer)
 					{
+						currentState = LevelStates.Complete;
 						onStateChange (LevelStates.Complete);
 					}
 				}
@@ -107,9 +108,9 @@ public class LevelManager : MonoBehaviour
 	}
 	void HideGameOver()
 	{
-		GameOverCanvasGroup.alpha = 1;
-		GameOverCanvasGroup.interactable = true;
-		GameOverCanvasGroup.blocksRaycasts = true;
+		GameOverCanvasGroup.alpha = 0;
+		GameOverCanvasGroup.interactable = false;
+		GameOverCanvasGroup.blocksRaycasts = false;
 	}
 	void DisplayLevelComplete()
 	{
